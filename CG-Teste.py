@@ -1,5 +1,6 @@
 import sys
 import pygame
+import random
 
 pygame.init()
 
@@ -11,25 +12,31 @@ tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Pygame")
 
 PRETO = (0, 0, 0)
-BRANCO = (244, 255, 255)
-
+BRANCO = (255, 255, 255)
+VERMELHO = (255, 0, 0)
+AZUL = (0, 0, 255)
+VERDE = (0, 255, 0)
+CORES = (BRANCO, VERMELHO, AZUL, VERDE)
 tamanho_fonte = 50
 fonte =pygame.font.SysFont(None, tamanho_fonte)
 
 texto = fonte.render("Leonardo", True, BRANCO)
-texto_rect = texto.get_rect(center=(largura/2, altura/2)) # meio
+texto_rect = texto.get_rect(center=(largura /2, altura /2))
+clock = pygame.time.Clock()
 
-#texto_rect = texto.get_rect(center=(largura/10, altura/2)) # esquerda
+#velocidade_x = 1
+#velocidade_y = 1
 
-#texto_rect = texto.get_rect(center=(largura/2, altura/25)) # cima
+velocidade_x = random.randint(-1, 1)
+velocidade_y = random.randint(-1, 1)
 
-#texto_rect = texto.get_rect(center=(720, 300)) # direita centro
+while velocidade_x == 0:
+    velocidade_x = random.randint(-1, 1)
+while velocidade_y == 0:
+    velocidade_y = random.randint(-1, 1)
 
-#texto_rect = texto.get_rect(center=(720 , 20)) # direita cima
 
-#texto_rect = texto.get_rect(center=(720 , 580)) # direita baixo
 
-#texto_rect = texto.get_rect(center=(80 , 580)) # esquerdo baixo
 
 #Loop principal
 while True:
@@ -37,6 +44,26 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
+    texto_rect.x += velocidade_x
+
+    if texto_rect.right >= largura or texto_rect.left <=0:
+        velocidade_x = random.randint(-1, 1)
+        velocidade_y = random.randint(-1, 1)
+        COR = random.randint(0, len(CORES) - 1)
+        texto = fonte.render("Leonardo", True, VERMELHO)
+    
+
+    texto_rect.y += velocidade_y
+
+    if texto_rect.bottom >= altura or texto_rect.top <=0:
+        velocidade_x = random.randint(-1, 1)
+        velocidade_y = random.randint(-1, 1)
+        COR = random.randint(0, len(CORES) - 1)
+        texto = fonte.render("Leonardo", True, AZUL)
+
+
+    clock.tick(165)    
 
     tela.fill(PRETO)
     tela.blit(texto, texto_rect)
