@@ -1,0 +1,1 @@
+![Texto alternativo](C:\Users\Leonardo Welzel\Pictures\Screenshots\Diagrama.png)
