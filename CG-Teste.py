@@ -47,8 +47,14 @@ while True:
 
     texto_rect.x += velocidade_x
 
-    if texto_rect.right >= largura or texto_rect.left <=0:
-        velocidade_x = random.randint(-1, 1)
+    if texto_rect.right >= largura:
+        velocidade_x = random.randint(-1, 0)
+        velocidade_y = random.randint(-1, 1)
+        COR = random.randint(0, len(CORES) - 1)
+        texto = fonte.render("Leonardo", True, VERMELHO)
+
+    if texto_rect.left <= 0:
+        velocidade_x = random.randint(0, 1)
         velocidade_y = random.randint(-1, 1)
         COR = random.randint(0, len(CORES) - 1)
         texto = fonte.render("Leonardo", True, VERMELHO)
@@ -56,9 +62,15 @@ while True:
 
     texto_rect.y += velocidade_y
 
-    if texto_rect.bottom >= altura or texto_rect.top <=0:
-        velocidade_x = random.randint(-1, 1)
+    if texto_rect.bottom >= altura:
         velocidade_y = random.randint(-1, 1)
+        velocidade_y = random.randint(-1, 0)
+        COR = random.randint(0, len(CORES) - 1)
+        texto = fonte.render("Leonardo", True, AZUL)
+
+    if texto_rect.top <=0:
+        velocidade_y = random.randint(-1, 1)
+        velocidade_y = random.randint(0, 1)
         COR = random.randint(0, len(CORES) - 1)
         texto = fonte.render("Leonardo", True, AZUL)
 
